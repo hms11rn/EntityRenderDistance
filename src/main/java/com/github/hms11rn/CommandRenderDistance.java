@@ -23,6 +23,7 @@ public class CommandRenderDistance extends CommandBase {
 		return "edr"; // command name is edr so it won't be to long.
 	}
 
+
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
 		return "/";
@@ -88,7 +89,7 @@ public class CommandRenderDistance extends CommandBase {
 
 	@SubscribeEvent
 	public void onTick(ClientTickEvent e) {
-		Minecraft.getMinecraft().displayGuiScreen(new EdrGui());
+		Minecraft.getMinecraft().displayGuiScreen(new EdrGui(Minecraft.getMinecraft().currentScreen));
 		MinecraftForge.EVENT_BUS.unregister(this);
 	}
 
