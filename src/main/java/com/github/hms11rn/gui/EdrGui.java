@@ -22,10 +22,6 @@ public class EdrGui extends GuiScreen {
 	GuiButton close;
 	GuiScreen parent;
 
-	public EdrGui() {
-		super();
-	}
-
 	public EdrGui(GuiScreen parent) {
 		this.parent = parent;
 	}
