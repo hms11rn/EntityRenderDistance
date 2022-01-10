@@ -22,8 +22,11 @@ public class EdrGui extends GuiScreen {
 	GuiButton close;
 	GuiScreen parent;
 
-	public EdrGui(GuiScreen parent) {
+	public EdrGui() {
 		super();
+	}
+
+	public EdrGui(GuiScreen parent) {
 		this.parent = parent;
 	}
 
@@ -32,7 +35,7 @@ public class EdrGui extends GuiScreen {
 
 		player = new GuiSlider(0, width / 2 - 90, 45, 180, 20, "Player Render Distance: ", "", 1, 140,
 				edr.pConfig.playerR, false, true);
-		entity = new GuiSlider(0, width / 2 - 90, 70, 180, 20, "Entity Render Distance: ", "", 1, 140,
+		entity = new GuiSlider(0, width / 2 - 90, 70, 180, 20, "General Entity Render Distance: ", "", 1, 140,
 				edr.pConfig.entityR, false, true);
 		close = new GuiButton(0, width / 2 - 30, 95, 60, 20, "close");
 
