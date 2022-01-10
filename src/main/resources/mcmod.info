@@ -3,7 +3,7 @@
   "modid": "erd",
   "name": "Entity Render Distance",
   "description": "Provides entity render distance.",
-  "version": "${1.0}",
+  "version": "${2.0}",
   "mcversion": "${1.8}",
   "url": "github.com/hms11rn",
   "updateUrl": "",
