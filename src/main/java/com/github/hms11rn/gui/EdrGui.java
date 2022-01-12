@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.GuiScrollingList;
 import net.minecraftforge.fml.client.config.GuiSlider;
@@ -29,11 +30,11 @@ public class EdrGui extends GuiScreen {
 	@Override
 	public void initGui() {
 
-		player = new GuiSlider(0, width / 2 - 90, 45, 180, 20, "Player Render Distance: ", "", 1, 140,
+		player = new GuiSlider(0, width / 2 - 90, height / 2 - 50, 180, 20, "Player Render Distance: ", "", 1, 140,
 				edr.pConfig.playerR, false, true);
-		entity = new GuiSlider(0, width / 2 - 90, 70, 180, 20, "Entity Render Distance: ", "", 1, 140,
+		entity = new GuiSlider(0, width / 2 - 90, height / 2 - 25, 180, 20, "Entity Render Distance: ", "", 1, 140,
 				edr.pConfig.entityR, false, true);
-		close = new GuiButton(0, width / 2 - 30, 95, 60, 20, "close");
+		close = new GuiButton(0, width / 2 - 30, height / 2, 60, 20, "close");
 
 		buttonList.add(player);
 		buttonList.add(entity);
@@ -45,6 +46,7 @@ public class EdrGui extends GuiScreen {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
+		this.drawString(fontRendererObj, "Entity Render Distance " + edr.VERSION, width / 2 - (20 * 3), height / 2 - 75, 0xb9c2b8);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
