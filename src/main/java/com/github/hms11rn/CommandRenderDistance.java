@@ -23,7 +23,6 @@ public class CommandRenderDistance extends CommandBase {
 		return "edr"; // command name is edr so it won't be to long.
 	}
 
-
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
 		return "/";
@@ -31,35 +30,42 @@ public class CommandRenderDistance extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		String str = args.length != 0 ? args[0] : ""; // returns whether the string is empty and open the gui or its a command
+		String str = args.length != 0 ? args[0] : ""; // returns whether the string is empty and open the gui or its a
+														// command
 
 		if (str.isEmpty()) {
-			MinecraftForge.EVENT_BUS.register(this); // gui must be open at a tick and not a random time, so I am using tick event to do this.
+			MinecraftForge.EVENT_BUS.register(this); // gui must be open at a tick and not a random time, so I am using
+														// tick event to do this.
 			return;
 		}
 		if (!str.equalsIgnoreCase("Entity") && !str.equalsIgnoreCase("Player")) {
-			MinecraftForge.EVENT_BUS.register(this); // Gui must be open at a tick and not a random time, so I am using tick event to do this.
+			MinecraftForge.EVENT_BUS.register(this); // Gui must be open at a tick and not a random time, so I am using
+														// tick event to do this.
 			return;
 		}
 		if (!isInteger(args[1])) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "The value must be an integer, usage: /edr [Player, Entity] [Value 1-140]"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED
+					+ "The value must be an integer, usage: /edr [Player, Entity] [Value 1-140]"));
 			return;
 		}
 		int value = Integer.parseInt(args[1]);
 
-		if (1 > value || 140 < value) { // Coudln't get it to work for more then 140 blocks.
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "The value must be between 1 and 140."));
+		if (1 > value || 140 < value) { // Couldn't get it to work for more then 140 blocks.
+			Minecraft.getMinecraft().thePlayer.addChatMessage(
+					new ChatComponentText(EnumChatFormatting.RED + "The value must be between 1 and 140."));
 			return;
 		}
-
+		
 		if (str.equals("Entity")) {
 			EntityRenderDistance.pConfig.entityR = value;
 			EntityRenderDistance.pConfig.set();
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "Set Entity Render Distance to " + EntityRenderDistance.edr.pConfig.entityR));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN
+					+ "Set Entity Render Distance to " + EntityRenderDistance.edr.pConfig.entityR));
 		} else if (str.equals("Player")) {
 			EntityRenderDistance.pConfig.playerR = value;
 			EntityRenderDistance.pConfig.set();
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "Set Player Render Distance to " + EntityRenderDistance.edr.pConfig.playerR));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN
+					+ "Set Player Render Distance to " + EntityRenderDistance.edr.pConfig.playerR));
 		}
 
 	}
@@ -82,18 +88,18 @@ public class CommandRenderDistance extends CommandBase {
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 0) {
-			return newList("Entity", "Player", "Gui");
+			return newList("Entity", "Player", "Gui"); // 'Gui' is not an actual argument but it would open the gui as a default option if neither Entity nor Player has been typed.
 		} else
 			return newList(); // returns empty tab list.
 	}
 
 	@SubscribeEvent
 	public void onTick(ClientTickEvent e) {
-		Minecraft.getMinecraft().displayGuiScreen(new EdrGui(Minecraft.getMinecraft().currentScreen));
-		MinecraftForge.EVENT_BUS.unregister(this);
+		Minecraft.getMinecraft().displayGuiScreen(new EdrGui(Minecraft.getMinecraft().currentScreen)); 
+		MinecraftForge.EVENT_BUS.unregister(this); // Unregister as this event is only used to open the gui.
 	}
 
-	<T> List<T> newList(T... obj) { 
+	<T> List<T> newList(T... obj) {
 		return Arrays.asList(obj);
 	}
 }

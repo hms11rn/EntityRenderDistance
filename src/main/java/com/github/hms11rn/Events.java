@@ -11,9 +11,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 public class Events {
 
 	/**
-	 * This is the main part of this mod, this changes renderDistanceWeight of each entity,
-	 * diving by 68 makes me be able to convert the actual distance to the proper weight
-	 * that Minecraft uses.
+	 * This is the most important part of thsi mod, this changes
+	 * renderDistanceWeight of each entity, diving by 68 makes me be able to convert
+	 * the actual distance to the proper weight that Minecraft uses.
 	 */
 	@SubscribeEvent
 	public void clientTicked(ClientTickEvent e) {
