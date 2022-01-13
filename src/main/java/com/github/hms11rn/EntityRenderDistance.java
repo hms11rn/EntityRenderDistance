@@ -48,7 +48,7 @@ public class EntityRenderDistance {
 		for (String str : entityList) {
 			int id = EntityList.getIDFromString(str);
 			Class<? extends Entity> clazz = EntityList.getClassFromID(id);
-			EntityRegistry.registerModEntity(clazz, str, id, EntityRenderDistance.erd, i, 1, true);
+			EntityRegistry.registerModEntity(clazz, str, id, this, i, 1, true);
 
 		}
 	}
