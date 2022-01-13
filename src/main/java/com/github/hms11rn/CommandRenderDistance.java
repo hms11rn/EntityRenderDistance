@@ -3,7 +3,7 @@ package com.github.hms11rn;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.hms11rn.gui.EdrGui;
+import com.github.hms11rn.gui.ErdGui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
@@ -20,7 +20,7 @@ public class CommandRenderDistance extends CommandBase {
 
 	@Override
 	public String getCommandName() {
-		return "edr"; // command name is edr so it won't be to long.
+		return "erd"; // command name is erd so it won't be to long.
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class CommandRenderDistance extends CommandBase {
 		}
 		if (!isInteger(args[1])) {
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED
-					+ "The value must be an integer, usage: /edr [Player, Entity] [Value 1-140]"));
+					+ "The value must be an integer, usage: /erd [Player, Entity] [Value 1-140]"));
 			return;
 		}
 		int value = Integer.parseInt(args[1]);
@@ -57,15 +57,15 @@ public class CommandRenderDistance extends CommandBase {
 		}
 		
 		if (str.equals("Entity")) {
-			EntityRenderDistance.pConfig.entityR = value;
-			EntityRenderDistance.pConfig.set();
+			EntityRenderDistance.config.entityR = value;
+			EntityRenderDistance.config.set();
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN
-					+ "Set Entity Render Distance to " + EntityRenderDistance.edr.pConfig.entityR));
+					+ "Set Entity Render Distance to " + EntityRenderDistance.erd.config.entityR));
 		} else if (str.equals("Player")) {
-			EntityRenderDistance.pConfig.playerR = value;
-			EntityRenderDistance.pConfig.set();
+			EntityRenderDistance.config.playerR = value;
+			EntityRenderDistance.config.set();
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN
-					+ "Set Player Render Distance to " + EntityRenderDistance.edr.pConfig.playerR));
+					+ "Set Player Render Distance to " + EntityRenderDistance.erd.config.playerR));
 		}
 
 	}
@@ -95,7 +95,7 @@ public class CommandRenderDistance extends CommandBase {
 
 	@SubscribeEvent
 	public void onTick(ClientTickEvent e) {
-		Minecraft.getMinecraft().displayGuiScreen(new EdrGui(Minecraft.getMinecraft().currentScreen)); 
+		Minecraft.getMinecraft().displayGuiScreen(new ErdGui(Minecraft.getMinecraft().currentScreen)); 
 		MinecraftForge.EVENT_BUS.unregister(this); // Unregister as this event is only used to open the gui.
 	}
 

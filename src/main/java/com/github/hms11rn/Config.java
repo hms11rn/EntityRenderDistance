@@ -13,16 +13,14 @@ public class Config {
 
 	public int playerR = 68; // 68 default
 	public int entityR = 68; // 68 default
-	public File configFile;
 	Configuration c;
 	public List<String> entities = EntityList.getEntityNameList();
 	public Map<String, Integer> entityValues;
 	public String splitter = "?:/'split'/:?";
 
-	public Config() {
+	public Config(File file) {
 		entityValues = createMapFromList(entities);
-		configFile = new File(Loader.instance().getConfigDir().getAbsolutePath() + "/EntityRenderDistance.cfg");
-		c = new Configuration(configFile);
+		c = new Configuration(file);
 		c.load();
 		playerR = c.get("Player_Render_Distance", "Player", 68).getInt();
 		entityR = c.get("Entity_Render_Distance", "Entity_General", 68).getInt();
@@ -30,7 +28,7 @@ public class Config {
 		for (String entity : entities) { // This is going to be an update in the future once I get more time to make a better gui.
 			entityValues.put(entity, c.get("Entity_Render_Distance", entity, 68).getInt());
 		}
-		EntityRenderDistance.edr.set(entityR > playerR ? entityR : playerR + 30);
+		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30);
 		c.save();
 	}
 
@@ -46,7 +44,7 @@ public class Config {
 		for (String entity : entities) { 
 			entityValues.put(entity, c.get("Entity_Render_Distance", entity, 68).getInt());
 		}
-		EntityRenderDistance.edr.set(entityR > playerR ? entityR : playerR + 30); // This is an important part of this because otherwise changing the entity rendering weight won't make a difference
+		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // This is an important part of this because otherwise changing the entity rendering weight won't make a difference
 		c.save();
 	}
 

@@ -24,10 +24,10 @@ public class Events {
 			for (Entity t : entities) {
 				if (t instanceof EntityPlayer) {
 					EntityPlayer player = (EntityPlayer) t;
-					double i = ((double) EntityRenderDistance.pConfig.playerR) / 68;
+					double i = ((double) EntityRenderDistance.config.playerR) / 68;
 					t.renderDistanceWeight = i;
 				} else {
-					double i = ((double) EntityRenderDistance.pConfig.entityR) / 68;
+					double i = ((double) EntityRenderDistance.config.entityR) / 68;
 					t.renderDistanceWeight = i;
 				}
 			}
