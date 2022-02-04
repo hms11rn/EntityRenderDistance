@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 @Mod(modid = EntityRenderDistance.MODID, version = EntityRenderDistance.VERSION)
 public class EntityRenderDistance {
 	public static final String MODID = "erd";
-	public static final String VERSION = "2.0";
+	public static final String VERSION = "0.9";
 	public static EntityRenderDistance erd;
 	public static Config config;
 
