@@ -9,6 +9,14 @@ import net.minecraft.entity.EntityList;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 
+/**
+ * Config file used just for this mod. <br>
+ * this class contains playerR, entityR playerR is Player Render Distance,
+ * entityR is Entity Render Distance
+ * 
+ * @author hms11
+ *
+ */
 public class Config {
 
 	public int playerR = 68; // 68 default
@@ -25,10 +33,12 @@ public class Config {
 		playerR = c.get("Player_Render_Distance", "Player", 68).getInt();
 		entityR = c.get("Entity_Render_Distance", "Entity_General", 68).getInt();
 
-		for (String entity : entities) { // This is going to be an update in the future once I get more time to make a better gui.
+		for (String entity : entities) { // This is going to be an update in the future once I get more time to make a
+											// better gui.
 			entityValues.put(entity, c.get("Entity_Render_Distance", entity, 68).getInt());
 		}
-		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30);
+		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // TODO This is using static access
+																					// right now
 		c.save();
 	}
 
@@ -41,10 +51,13 @@ public class Config {
 		c.get("Entity_Render_Distance", "Entity_General", 68).set(entityR);
 		playerR = c.get("Player_Render_Distance", "Player", 68).getInt();
 		entityR = c.get("Entity_Render_Distance", "Entity_General", 68).getInt();
-		for (String entity : entities) { 
+		for (String entity : entities) {
 			entityValues.put(entity, c.get("Entity_Render_Distance", entity, 68).getInt());
 		}
-		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // This is an important part of this because otherwise changing the entity rendering weight won't make a difference
+		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // This is an important part of this
+																					// because otherwise changing the
+																					// entity rendering weight won't
+																					// make a difference
 		c.save();
 	}
 
