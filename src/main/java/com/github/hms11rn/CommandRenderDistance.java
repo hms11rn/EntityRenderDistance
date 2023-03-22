@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.hms11rn.gui.ErdGui;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -16,6 +17,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
+/**
+ * Command used for EntityRenderDistance
+ */
 public class CommandRenderDistance extends CommandBase {
 
 	@Override
@@ -28,6 +32,12 @@ public class CommandRenderDistance extends CommandBase {
 		return "/";
 	}
 
+	/**
+	 * Processes command, if command is empty, it opens gui.
+	 * <br> first line: Entity/Player
+	 * <br> second line Value of distance
+	 *
+	 */
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		String str = args.length != 0 ? args[0] : ""; // returns whether the string is empty and open the gui or its a
@@ -67,7 +77,6 @@ public class CommandRenderDistance extends CommandBase {
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN
 					+ "Set Player Render Distance to " + EntityRenderDistance.erd.config.playerR));
 		}
-
 	}
 
 	@Override
@@ -76,6 +85,11 @@ public class CommandRenderDistance extends CommandBase {
 		return true;
 	}
 
+	/**
+	 * Little Util file to check if a string is integer for command.
+	 * @param str
+	 * @return
+	 */
 	public boolean isInteger(String str) {
 		try {
 			Integer.parseInt(str);
@@ -85,6 +99,13 @@ public class CommandRenderDistance extends CommandBase {
 		return true;
 	}
 
+	/**
+	 * Adds tab completion, so you can type 'tab' and its going to give you options.
+	 * @param sender
+	 * @param args
+	 * @param pos
+	 * @return
+	 */
 	@Override
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		if (args.length == 0) {
@@ -93,6 +114,10 @@ public class CommandRenderDistance extends CommandBase {
 			return newList(); // returns empty tab list.
 	}
 
+	/**
+	 * Read why this is used in {@link com.github.hms11rn.gui.ErdGui#onTick(ClientTickEvent)}
+	 * @param e
+	 */
 	@SubscribeEvent
 	public void onTick(ClientTickEvent e) {
 		Minecraft.getMinecraft().displayGuiScreen(new ErdGui(Minecraft.getMinecraft().currentScreen)); 

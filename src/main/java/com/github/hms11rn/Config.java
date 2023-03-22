@@ -19,13 +19,37 @@ import net.minecraftforge.fml.common.Loader;
  */
 public class Config {
 
+	/**
+	 * Player Render Distance value.
+	 */
 	public int playerR = 68; // 68 default
-	public int entityR = 68; // 68 default
-	Configuration c;
-	public List<String> entities = EntityList.getEntityNameList();
-	public Map<String, Integer> entityValues;
-	public String splitter = "?:/'split'/:?";
+	/**
+	 * Entity Render Distance value.
+	 */
 
+	public int entityR = 68; // 68 default
+	/**
+	 * Forge config class.
+	 */
+	Configuration c;
+	/**
+	 * List of all entities, this is not being used right now
+	 * but in future versions its going to be used for
+	 * Map entityValues.
+	 */
+	public List<String> entities = EntityList.getEntityNameList();
+	/**
+	 * Currently not being used, in future versions this is going to be
+	 * used to be able to apply different values to each entity
+	 */
+	public Map<String, Integer> entityValues;
+
+	public  boolean liveUpdate = false;
+
+	/**
+	 *
+	 * @param file
+	 */
 	public Config(File file) {
 		entityValues = createMapFromList(entities);
 		c = new Configuration(file);
@@ -37,8 +61,7 @@ public class Config {
 											// better gui.
 			entityValues.put(entity, c.get("Entity_Render_Distance", entity, 68).getInt());
 		}
-		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // TODO This is using static access
-																					// right now
+		EntityRenderDistance.erd.set(entityR > playerR ? entityR : playerR + 30); // TODO This is using static access right now
 		c.save();
 	}
 
